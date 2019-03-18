@@ -39,7 +39,7 @@
 #include "migration/colo.h"
 
 //OSNET
-#define enable_rate_limiting
+#undef enable_rate_limiting
 int iterations = 0;
 
 //dinuni
@@ -1855,7 +1855,7 @@ static void migration_completion(MigrationState *s, int current_active_state,
                 qemu_file_set_rate_limit(s->to_dst_file, INT64_MAX);
 #endif
                 qemu_savevm_state_complete_precopy(s->to_dst_file, false);
-        	printf("Down iter %d Down pages %d \n",iterations,down_page);
+        	//printf("Down iter %d Down pages %d \n",iterations,down_page);
 	        s->block_inactive = true;
             }
         }
@@ -2024,7 +2024,7 @@ static void *migration_thread(void *opaque)
                 }
                 /* Just another iteration step */
                 qemu_savevm_state_iterate(s->to_dst_file, entered_postcopy);
-        	printf("Iteration %d page_count %d \n",iterations,page_count);   
+        	//printf("Iteration %d page_count %d \n",iterations,page_count);   
 		iterations++;
 		page_count = 0; 
 	} else {
@@ -2062,7 +2062,7 @@ static void *migration_thread(void *opaque)
             if (s->dirty_bytes_rate && transferred_bytes > 10000) {
                 s->expected_downtime = s->dirty_bytes_rate / bandwidth;
             }
-printf("dirty bytes rate %" PRId64 "dirty pages rate %" PRId64 "\n", s->dirty_bytes_rate, s->dirty_bytes_rate);
+//printf("dirty bytes rate %" PRId64 "dirty pages rate %" PRId64 "\n", s->dirty_bytes_rate, s->dirty_bytes_rate);
 
 //OSNET
 #ifdef enable_rate_limiting

@@ -1036,7 +1036,7 @@ static int do_mem_mtest(cmd_tbl_t *cmdtp, int flag, int argc,
 			break;
 		}
 
-		printf("Iteration: %6d\r", iteration + 1);
+		//printf("Iteration: %6d\r", iteration + 1);
 		debug("\n");
 		if (alt_test) {
 			errs = mem_test_alt(buf, start, end, dummy);

@@ -2080,14 +2080,15 @@ static int ram_save_iterate(QEMUFile *f, void *opaque)
         */
         if ((i & 63) == 0) {
             uint64_t t1 = (qemu_clock_get_ns(QEMU_CLOCK_REALTIME) - t0) / 1000000;
+	    
 //OSNET
-#ifdef enable_rate_limiting
+//#ifdef enable_rate_limiting
 	    //printf("check16\n");
             if (t1 > MAX_WAIT) {
                 trace_ram_save_iterate_big_wait(t1, i);
                 break;
             }
-#endif
+//#endif
         }
         i++;
 
